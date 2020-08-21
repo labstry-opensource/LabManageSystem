@@ -10,6 +10,6 @@
     <link rel="stylesheet" href="https://www.unpkg.com/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
-    <link rel="stylesheet" href="<?php echo htmlspecialchars('css/main.css')?>">
+    <link rel="stylesheet" href="<?php echo BASE_PATH . htmlspecialchars('/css/main.css')?>">
     <title>Labstry Forum 3</title>
 </head>

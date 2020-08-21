@@ -1,7 +1,7 @@
 <?php
 $current_version = '3.0.5-Alpha';
 
-include_once get_campaign_template('')
+include dirname(__FILE__) . '/header.php';
 ?>
 
 <body>
@@ -62,7 +62,7 @@ include_once get_campaign_template('')
                     </article>
                 </div>
                 <div class="col-12 col-md-6 px-5">
-                    <img class="img-fluid" src="assets/custom_made.svg" alt="The picture shows a computer with customizable contents in the window.">
+                    <img class="img-fluid" src="<?php echo BASE_PATH ?>/assets/custom_made.svg" alt="The picture shows a computer with customizable contents in the window.">
                 </div>
             </div>
         </div>

@@ -10,17 +10,24 @@ include_once dirname(__FILE__) . '/src/Router.php';
 $router = new Router();
 
 function get_campaign_template($campaign_name = null){
-    return dirname(__FILE__ . '/campaign/' . (!empty($campaign_name) ? $campaign_name : ''));
+    return dirname(__FILE__ ) . '/page/' . (!empty($campaign_name) ? $campaign_name : '') . '/index.php';
 }
 
 
-$router->route(BASE_PATH . '/()/', function () {
+$router->route(BASE_PATH . '/', function () {
     header('Location: '. BASE_PATH .'/en/');
     exit;
 });
 
+
+$router->route(BASE_PATH . '/(en|zh-hk)/([\w-]+?)/', function ($language, $page){
+    if(file_exists(get_campaign_template($page))){
+        include get_campaign_template($page);
+    }
+});
+
+
 Router::execute(explode('?', $_SERVER['REQUEST_URI'])[0]);
 
-if(file_exists(get_campaign_template($page) . '/index.php')){
-    include get_campaign_template($page) . '/index.php';
-}
+http_response_code(404);
+
