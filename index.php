@@ -7,6 +7,7 @@ defined('APP_PATH') || define('APP_PATH', $_SERVER['REQUEST_URI']);
 
 include_once ROOT_DIR . '/src/Router.php';
 
+
 /*
  * Note that you should have page struct like this so that my router can handle the redirect.
  * /page
@@ -33,15 +34,19 @@ function get_campaign_template($language = 'en', $campaign_name = null){
     return dirname(__FILE__ ) . '/page/' . $language. '/'. (!empty($campaign_name) ? $campaign_name : '') . '/index.php';
 }
 
+$router->route(BASE_PATH . '/', function () {
+    global $uri_split;
+    header('Location: '. BASE_PATH .'/en/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
+});
+
+
 $router->route(BASE_PATH . '/([\w-]+?)', function($path){
     //Add forward slash
-    header('Location: '. BASE_PATH .'/' . $path . '/');
+    global $uri_split;
+    header('Location: '. BASE_PATH .'/' . $path . '/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
     exit;
 });
 
-$router->route(BASE_PATH . '/', function ($path) {
-    header('Location: '. BASE_PATH .'/en/');
-});
 
 
 /* We originally set up this path by listing all locales available.
@@ -50,18 +55,18 @@ $router->route(BASE_PATH . '/', function ($path) {
  * let it handles the rest.
  */
 
-$router->route(BASE_PATH . "/" . $lang_join . "/", function($language){
+$router->route(BASE_PATH . "/{$lang_join}/", function($language){
     include ROOT_DIR . "/page/{$language}/home.php";
 });
 
-$router->route(BASE_PATH . '/(en|zh-hk)/([\w-]+?)/', function ($language, $page){
+$router->route(BASE_PATH . "/{$lang_join}/([\w-]+?)/", function ($language, $page){
     if(file_exists(get_campaign_template($language, $page))){
         include get_campaign_template($language, $page);
     }
 });
 
+$uri_split = explode('?', $_SERVER['REQUEST_URI']);
+Router::execute($uri_split[0]);
 
-Router::execute(explode('?', $_SERVER['REQUEST_URI'])[0]);
-
-http_response_code(404);
+//http_response_code(404);
 

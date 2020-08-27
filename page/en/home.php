@@ -1,2 +1,2 @@
 <?php
-echo '1';
+print_r($_GET);
