@@ -40,15 +40,6 @@ $router->route(BASE_PATH . '/', function () {
 });
 
 
-$router->route(BASE_PATH . '/([\w-]+?)', function($path){
-    //Add forward slash
-    global $uri_split;
-    header('Location: '. BASE_PATH .'/' . $path . '/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
-    exit;
-});
-
-
-
 /* We originally set up this path by listing all locales available.
  * i.e. (/en|zh-hk|zh-tw....)/
  * BUT MAN, we are lazy. Instead, we use our imploded locale scanning string to create a regex and
@@ -59,10 +50,19 @@ $router->route(BASE_PATH . "/{$lang_join}/", function($language){
     include ROOT_DIR . "/page/{$language}/home.php";
 });
 
-$router->route(BASE_PATH . "/{$lang_join}/([\w-]+?)/", function ($language, $page){
+$router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)/", function ($language, $page){
     if(file_exists(get_campaign_template($language, $page))){
         include get_campaign_template($language, $page);
+    }else{
+        http_response_code(404);
     }
+});
+
+$router->route(BASE_PATH . '/([\w/-]+?)', function($path){
+    //Add forward slash
+    global $uri_split;
+    header('Location: '. BASE_PATH .'/en/' . $path . '/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
+    exit;
 });
 
 $uri_split = explode('?', $_SERVER['REQUEST_URI']);

@@ -25,7 +25,6 @@ class Router
         foreach (self::$routes as $pattern => $callback) {
             if (preg_match($pattern, $url, $params)) {
                 array_shift($params);
-                print_r(array_values($params));
                 return call_user_func_array($callback, array_values($params));
             }
         }
