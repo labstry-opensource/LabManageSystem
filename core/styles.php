@@ -7,5 +7,6 @@ $_lms_styles = array();
  *
  * */
 function enqueue_style($link){
+    global $_lms_styles;
     $_lms_styles[] = $link;
 }
