@@ -18,6 +18,8 @@ class ValidateRegistration
         ($errors = $this->validatePasswordStrength($user_arr['password'])) ?
             $error_code['password'] = $errors : null;
 
+        return $error_code;
+
     }
 
     function validateUsernameStrength($username){

@@ -20,7 +20,17 @@ class Users
     }
 
     function registerUser($user_arr){
+        $validator = new ValidateRegistration();
+        $error_code = $validator->validate($user_arr);
 
+        if(!$error_code){
+            $this->insert([
+               'username' => $user_arr['username'],
+               'password' => $user_arr['password'],
+            ]);
+        }
+
+        return $error_code;
     }
 
     function hasUsername($username){
