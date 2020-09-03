@@ -10,3 +10,4 @@ $core_list = glob(ROOT_DIR . '/core/*');
 foreach ($core_list as $list_item) {
     include $list_item;
 }
+
