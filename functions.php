@@ -7,7 +7,7 @@ defined('APP_PATH') || define('APP_PATH', $_SERVER['REQUEST_URI']);
 
 $core_list = glob(ROOT_DIR . '/core/*');
 
+
 foreach ($core_list as $list_item) {
     include $list_item;
 }
-
