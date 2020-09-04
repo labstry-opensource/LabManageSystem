@@ -3,7 +3,7 @@
 
 namespace com\labstry\lms_core;
 
-include_once BASE_PATH . '/vendor/meedo/Meedo.php';
+include_once ROOT_DIR . '/vendor/meedo/Meedo.php';
 use Medoo\Medoo;
 
 
