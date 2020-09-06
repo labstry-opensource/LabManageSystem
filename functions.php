@@ -7,6 +7,8 @@ defined('APP_PATH') || define('APP_PATH', $_SERVER['REQUEST_URI']);
 
 $core_list = glob(ROOT_DIR . '/core/*');
 
+include_once ROOT_DIR . '/error-handle.php';
+
 if(file_exists(ROOT_DIR . '/credentials.php')){
     include_once ROOT_DIR . '/credentials.php';
 }

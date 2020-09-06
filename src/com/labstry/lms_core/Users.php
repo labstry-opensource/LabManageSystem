@@ -6,6 +6,7 @@ namespace com\labstry\lms_core;
 class Users
 {
     public $connection;
+    public $user_table_name = 'lms_users';
     public $error;
 
     function __construct($connection)
@@ -14,7 +15,7 @@ class Users
     }
 
     function getUserById($userid){
-        return $this->connection->select('*', [
+        return $this->connection->select('*', $this->user_table_name,  [
             'id' => $userid
         ]);
     }
@@ -34,13 +35,13 @@ class Users
     }
 
     function hasUsername($username){
-        return $this->connection->get('*', [
+        return $this->connection->count('*', $this->user_table_name, [
             'username' => $username
         ]);
     }
 
     function verifyPassword($username, $password){
-        $db_password = $this->connection->select('password', [
+        $db_password = $this->connection->select('password', $this->user_table_name, [
             'username' => $username
         ]);
         return password_verify($password, $db_password);
