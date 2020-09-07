@@ -29,9 +29,20 @@ function enqueue_action($action_name, $func_name, $priority = 0, $num_para = 0){
 
 function dequeue_action($action_name, $func_name = null){
     global $_lms_action_arr;
-    foreach($_lms_action_arr as $item){
+    if(empty($_lms_action_arr[$action_name])) return false;
+    if($func_name === null){
+        //Reset the whole action completely
+        $_lms_action_arr[$action_name] = null;
+    }else{
+        foreach($_lms_action_arr[$action_name] as $priority => $item){
+
+        }
+        print_r($_lms_action_arr[$action_name]);
+    }
+
+    foreach($_lms_action_arr as $key => $item){
         if($func_name === null){
-            $item[$action_name] = null;
+            $_lms_action_arr[] = null;
             ksort($_lms_action_arr[$action_name]);
             return true;
         }
@@ -53,8 +64,11 @@ function dequeue_action($action_name, $func_name = null){
  */
 function perform_action($action_name, ...$args){
     global $_lms_action_arr;
-    $func_names = $_lms_action_arr[$action_name];
-    foreach($func_names as $func){
-        call_user_func_array($func, $args);
+    if(!empty($_lms_action_arr[$action_name])){
+        $func_names = $_lms_action_arr[$action_name];
+        foreach($func_names as $func){
+            call_user_func_array($func['name'], $args);
+        }
     }
+
 }

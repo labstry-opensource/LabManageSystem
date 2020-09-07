@@ -15,7 +15,7 @@ class Users
     }
 
     function getUserById($userid){
-        return $this->connection->select('*', $this->user_table_name,  [
+        return $this->connection->select($this->user_table_name, '*',  [
             'id' => $userid
         ]);
     }
@@ -35,13 +35,14 @@ class Users
     }
 
     function hasUsername($username){
-        return $this->connection->count('*', $this->user_table_name, [
+        return $this->connection->count( $this->user_table_name, '*', [
             'username' => $username
         ]);
     }
 
     function verifyPassword($username, $password){
-        $db_password = $this->connection->select('password', $this->user_table_name, [
+        if(empty($username)) return false;
+        $db_password = $this->connection->get( $this->user_table_name, 'password', [
             'username' => $username
         ]);
         return password_verify($password, $db_password);

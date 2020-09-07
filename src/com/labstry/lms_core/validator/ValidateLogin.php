@@ -16,16 +16,22 @@ class ValidateLogin
     }
 
     public function validateEmptyUsername(){
-        return (empty($this->login_credentials['username']));
+        return (!empty($this->login_credentials['username']));
+    }
+
+    public function validateUsername(){
+        $users = new lms_core\Users($this->connection);
+        return ($users->hasUsername($this->login_credentials['username']));
     }
 
     public function validateEmptyPassword(){
         return (empty($this->login_credentials['password']));
     }
 
-    public function validateUsername(){
+    public function validatePassword(){
         $users = new lms_core\Users($this->connection);
-        return ($users->hasUsername($this->login_credentials['username']));
+        return $users->verifyPassword($this->login_credentials['username'],
+            $this->login_credentials['password']);
     }
 
 }
