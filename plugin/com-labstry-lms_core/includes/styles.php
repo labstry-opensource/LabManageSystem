@@ -15,7 +15,7 @@ $_lms_scripts = array();
 function enqueue_style($link, $key){
     //Use a key to enqueue version other than default
     global $_lms_styles;
-    $_lms_styles[] = $link;
+    $_lms_styles[$key] = $link;
 }
 
 

@@ -7,7 +7,7 @@
 //get_header();
 include_once dirname(__FILE__) . '/../functions.php';
 
-enqueue_style(BASE_PATH . '/css/admin.css');
+enqueue_style(BASE_PATH . '/css/admin.css', 'Admin Style');
 enqueue_script(BASE_PATH . '/js/svg-transformer.js');
 
 include_once dirname(__FILE__) . '/admin-header.php';
