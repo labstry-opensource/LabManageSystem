@@ -11,6 +11,13 @@ $requested_action = (!empty($_GET['__lms_action'])) ?  $_GET['__lms_action'] : (
 
 if($requested_action === null){
     $data['data']['error']['__lms_action'] = 'Nothing defined, thus nothing to do.';
+}
+if(!check_has_registered_api($requested_action)){
+    $data['data']['error']['__lms_action'] = 'No such API!';
+}
+if(!empty($data['data']['error'])){
     $apitools->outputJson($data);
 }
 
+
+load_api($requested_action);
