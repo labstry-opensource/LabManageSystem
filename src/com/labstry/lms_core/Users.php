@@ -20,6 +20,12 @@ class Users
         ]);
     }
 
+    function getUserIDByUsername($username){
+        return $this->connection->get($this->user_table_name, 'id', [
+            'username' => $username,
+        ]);
+    }
+
     function registerUser($user_arr){
         $validator = new ValidateRegistration();
         $error_code = $validator->validate($user_arr);

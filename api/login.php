@@ -34,3 +34,11 @@ perform_action('additional_credibility_challenge');
 if($data['error']){
     $apitools->outputJson($data);
 }
+
+if(!isset($_SESSION)) session_start();
+session_regenerate_id();
+
+$users = new lms_core\Users($connection);
+$_SESSION['id'] = $users->getUserIDByUsername($_POST['username']);
+
+

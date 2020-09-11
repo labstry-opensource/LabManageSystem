@@ -23,7 +23,7 @@ if(file_exists(ROOT_DIR . '/credentials.php')){
     include_once ROOT_DIR . '/credentials.php';
 }
 
-//This package, which consists of essential toolkits,  has fixed name.
+//This package, which consists of essential toolkits, has fixed name.
 include ROOT_DIR . '/plugin/com-labstry-lms_core/loader.php';
 
 
