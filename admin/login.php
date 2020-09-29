@@ -5,7 +5,8 @@ include_once dirname(__FILE__) . '/../functions.php';
 
 enqueue_style(BASE_PATH . '/css/admin.css');
 
-include_once dirname(__FILE__) . '/admin-header.php';
+$show_header = false;
+include_once dirname(__FILE__) . '/view/admin-header.php';
 ?>
 
 <div class="h-100 d-flex flex-column bg-pop-mosaic">
@@ -71,4 +72,4 @@ include_once dirname(__FILE__) . '/admin-header.php';
 
 <?php
 
-include_once dirname(__FILE__) . '/admin-footer.php';
+include_once dirname(__FILE__) . '/view/admin-footer.php';

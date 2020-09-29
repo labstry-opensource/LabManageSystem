@@ -9,6 +9,8 @@ $core_list = glob(ROOT_DIR . '/core/*');
 
 if(file_exists(ROOT_DIR . '/credentials.php')){
     include_once ROOT_DIR . '/credentials.php';
+}else{
+    //header('Location:' . BASE_PATH . '/installer/labstry-installer.php');
 }
 
 foreach ($core_list as $list_item) {

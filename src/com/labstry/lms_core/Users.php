@@ -14,7 +14,7 @@ class Users
     }
 
     function getUserById($userid){
-        return $this->connection->select('*', [
+        return $this->connection->select('lms_users', '*', [
             'id' => $userid
         ]);
     }
@@ -24,7 +24,7 @@ class Users
         $error_code = $validator->validate($user_arr);
 
         if(!$error_code){
-            $this->insert([
+            $this->insert('users', [
                'username' => $user_arr['username'],
                'password' => $user_arr['password'],
             ]);
@@ -33,21 +33,26 @@ class Users
         return $error_code;
     }
 
-    function hasUsername($username){
-        return $this->connection->get('*', [
+    function hasUsername($username)
+    {
+        return $this->connection->get('lms_users', '*', [
             'username' => $username
         ]);
     }
 
-    function verifyPassword($username, $password){
-        $db_password = $this->connection->select('password', [
+    function verifyPassword($username, $password)
+    {
+        $db_password = $this->connection->select('lms_users', 'password', [
             'username' => $username
         ]);
         return password_verify($password, $db_password);
     }
 
-    function getUserRoles($userid){
-
+    function getUserRoles($userid)
+    {
+        return $this->connection->select('lms_users', 'roles', [
+            'id[=]' => $userid,
+        ]);
     }
 
 }

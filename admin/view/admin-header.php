@@ -2,6 +2,7 @@
 
 global $_lms_styles;
 
+$show_header = isset($show_header) ? $show_header : true;
 ?>
 
 <!doctype html>
@@ -26,3 +27,8 @@ global $_lms_styles;
     }
 </style>
 <body>
+<?php if($show_header){ ?>
+<div class="bg-forum-green" style="height: 50px">
+    <img class="img-fluid"  src="<?php echo BASE_PATH . '/assets/lms-logo.svg'?>" alt="">
+</div>
+<?php } ?>
