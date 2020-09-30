@@ -11,7 +11,8 @@
     <title>Labstry Solutions</title>
 </head>
 <body>
-    <div class="d-flex flex-column align-items-center justify-content-center py-5" style="
+    <div class="d-flex flex-column align-items-center justify-content-center
+     text-center py-5" style="
     min-height: 120px;
     background-color: #9eabe4;
     background-image: linear-gradient(315deg, #9eabe4 0%, #77eed8 74%);">

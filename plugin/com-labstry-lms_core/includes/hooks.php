@@ -11,6 +11,7 @@ $_lms_action_arr = array();
 
 /*
  * Register functions to be executed
+ * Note: Registering functions on already hooked priority will remove the original function.
  */
 
 function enqueue_action($action_name, $func_name, $priority = 0, $num_para = 0){
@@ -29,20 +30,18 @@ function enqueue_action($action_name, $func_name, $priority = 0, $num_para = 0){
 
 function dequeue_action($action_name, $func_name = null){
     global $_lms_action_arr;
-    foreach($_lms_action_arr as $item){
-        if($func_name === null){
-            $item[$action_name] = null;
-            ksort($_lms_action_arr[$action_name]);
-            return true;
-        }
-        foreach ($item[$action_name] as $priority => $func) {
-            if ($func['name'] === $func_name) {
-                $item[$action_name][$priority] = null;
-                ksort($_lms_action_arr[$action_name]);
-                return true;
+    if(empty($_lms_action_arr[$action_name])) return false;
+    if($func_name === null){
+        //Reset the whole action completely
+        $_lms_action_arr[$action_name] = null;
+    }else{
+        foreach($_lms_action_arr[$action_name] as $priority => $item){
+            if($item['name'] === $func_name){
+                $_lms_action_arr[$action_name][$priority] = null;
             }
         }
     }
+    ksort($_lms_action_arr[$action_name]);
     return false;
 }
 
@@ -53,8 +52,16 @@ function dequeue_action($action_name, $func_name = null){
  */
 function perform_action($action_name, ...$args){
     global $_lms_action_arr;
-    $func_names = $_lms_action_arr[$action_name];
-    foreach($func_names as $func){
-        call_user_func_array($func, $args);
+    if(!empty($_lms_action_arr[$action_name])){
+        $func_names = $_lms_action_arr[$action_name];
+        print_r($func_names);
+        foreach($func_names as $func){
+            if(!empty($func)){
+                //Handles the bug when a hook is not properly dequeued.
+                call_user_func_array($func['name'], $args);
+            }
+
+        }
     }
+
 }
