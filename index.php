@@ -35,8 +35,8 @@ function get_campaign_template($lang, $page_slug_name, $page_slug, $parent_slug)
     if(!file_exists(get_campaign_template_dir($lang, $page_slug_name))){
        return false;
     }
-    global $_lms_connection;
-    $pages = new \com\labstry\lms_core\Pages($_lms_connection);
+    global $connection;
+    $pages = new \com\labstry\lms_core\Pages($connection);
     $field = array();
     $content = array();
     if($pages->checkHasPageBySlug($lang, $parent_slug, $page_slug)){
@@ -71,21 +71,20 @@ $router->route(BASE_PATH . "/{$lang_join}/", function($language){
 });
 
 $router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)/", function ($language, $page){
-    global $_lms_connection;
+    global $connection;
 
     $dir_page_arr = explode('/' , $page);
     $page_slug = $dir_page_arr[count($dir_page_arr)-1];
     $page_parent_slug = (count($dir_page_arr) === 1) ? '/' : $dir_page_arr[count($dir_page_arr) - 2];
 
     if(!get_campaign_template($language, $page, $page_slug, $page_parent_slug )){
-        $pages = new \com\labstry\lms_core\Pages($_lms_connection);
+        $pages = new \com\labstry\lms_core\Pages($connection);
         if($pages->checkHasPageBySlug($language, $page_parent_slug, $page_slug)){
             $page_arr = $pages->getPagePropBySlug($page_slug);
             get_default_template($page, $page_arr);
             die;
         }
     }
-
     http_response_code(404);
 });
 
