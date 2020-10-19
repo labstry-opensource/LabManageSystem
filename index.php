@@ -66,6 +66,10 @@ $router->route(BASE_PATH . '/', function () {
  * let it handles the rest.
  */
 
+/*
+ *  We are matching the route with a '/' first to check whether the user has added the '/' sign.
+ *  If they do not, they will fallback into the later one and redirect it back to the route with a '/' sign.
+ * */
 
 $router->route(BASE_PATH . "/{$lang_join}/", function($language){
     include ROOT_DIR . "/page/{$language}/index.php";
@@ -96,9 +100,6 @@ $router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)", function ($language, $pat
     global $uri_split;
     header('Location: '. BASE_PATH . "/{$language}/" . $path . '/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
 });
-
-
-
 
 
 $uri_split = explode('?', $_SERVER['REQUEST_URI']);
