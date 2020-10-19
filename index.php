@@ -66,13 +66,17 @@ $router->route(BASE_PATH . '/', function () {
  * let it handles the rest.
  */
 
+
 $router->route(BASE_PATH . "/{$lang_join}/", function($language){
     include ROOT_DIR . "/page/{$language}/index.php";
 });
 
+$router->route(BASE_PATH . "/{$lang_join}", function($language){
+    header('Location: '. BASE_PATH . "/{$language}/" . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
+});
+
 $router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)/", function ($language, $page){
     global $connection;
-
     $dir_page_arr = explode('/' , $page);
     $page_slug = $dir_page_arr[count($dir_page_arr)-1];
     $page_parent_slug = (count($dir_page_arr) === 1) ? '/' : $dir_page_arr[count($dir_page_arr) - 2];
@@ -88,12 +92,14 @@ $router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)/", function ($language, $pa
     http_response_code(404);
 });
 
-$router->route(BASE_PATH . '/([\w/-]+?)', function($path){
-    //Add forward slash
+$router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)", function ($language, $path){
     global $uri_split;
-    header('Location: '. BASE_PATH .'/en/' . $path . '/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
-    exit;
+    header('Location: '. BASE_PATH . "/{$language}/" . $path . '/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
 });
+
+
+
+
 
 $uri_split = explode('?', $_SERVER['REQUEST_URI']);
 Router::execute($uri_split[0]);
