@@ -13,7 +13,7 @@ defined('ROOT_DIR') || define('ROOT_DIR', dirname(__FILE__));
 defined('DIR') || define('DIR', dirname(__DIR__));
 defined('BASE_PATH') || define('BASE_PATH', str_replace(DIR, '', ROOT_DIR));
 defined('APP_PATH') || define('APP_PATH', $_SERVER['REQUEST_URI']);
-defined('ACTIVE_THEME') || define('ACTIVE_THEME', 'lms-default');
+defined('ACTIVE_THEME') || define('ACTIVE_THEME', 'labstry-mainsite');
 
 $core_list = glob(ROOT_DIR . '/plugin/com-labstry-lms_core/*');
 
@@ -30,4 +30,6 @@ include ROOT_DIR . '/plugin/com-labstry-lms_core/loader.php';
 
 
 //Load userspace functions.php. PLEASE DEFINE THEM IN THEME FOLDER, NOT HERE !!!
-include ROOT_DIR . '/theme/' . ACTIVE_THEME .'/functions.php';
+if(file_exists(ROOT_DIR . '/theme/' . ACTIVE_THEME . '/functions.php')){
+    include ROOT_DIR . '/theme/' . ACTIVE_THEME .'/functions.php';
+}

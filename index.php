@@ -51,13 +51,8 @@ function get_campaign_template($lang, $page_slug_name, $page_slug, $parent_slug)
 function get_default_template($page_stack, $page_var){
     $field = $page_var['custom_fields'];
     $content = $page_var['content'];
-    include_once dirname(__FILE__) . '/views/page-default.php';
+    include_once dirname(__FILE__) . '/theme/' . ACTIVE_THEME . '/default-page.php';
 }
-
-$router->route(BASE_PATH . '/', function () {
-    global $uri_split;
-    header('Location: '. BASE_PATH .'/en/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
-});
 
 
 /* We originally set up this path by listing all locales available.
@@ -66,10 +61,17 @@ $router->route(BASE_PATH . '/', function () {
  * let it handles the rest.
  */
 
+$router->route(BASE_PATH . "/(?!({$lang_join}))", function () {
+    global $uri_split;
+    header('Location: '. BASE_PATH .'/en/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
+});
+
+
 /*
  *  We are matching the route with a '/' first to check whether the user has added the '/' sign.
  *  If they do not, they will fallback into the later one and redirect it back to the route with a '/' sign.
  * */
+
 
 $router->route(BASE_PATH . "/{$lang_join}/", function($language){
     include ROOT_DIR . "/page/{$language}/index.php";
@@ -81,6 +83,8 @@ $router->route(BASE_PATH . "/{$lang_join}", function($language){
 
 $router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)/", function ($language, $page){
     global $connection;
+    global $page_language;
+    $page_language = $language;
     $dir_page_arr = explode('/' , $page);
     $page_slug = $dir_page_arr[count($dir_page_arr)-1];
     $page_parent_slug = (count($dir_page_arr) === 1) ? '/' : $dir_page_arr[count($dir_page_arr) - 2];

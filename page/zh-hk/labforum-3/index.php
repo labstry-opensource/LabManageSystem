@@ -3,6 +3,7 @@
 $current_version = '3.0.5-Alpha';
 
 getHeader();
+
 ?>
 <div class="forum-wrapper overflow-hidden">
     <section class="container-xxl title-section">

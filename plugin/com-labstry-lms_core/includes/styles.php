@@ -6,8 +6,8 @@ $_lms_scripts = array();
 
 /*
  *  Enqueue Styles to be used in all pages.
- *  We discourage using style and script enqueue as it would affect speed and
- *  reduce flexibility. It works but don't use them.
+ *  We discourage using style and script enqueue as it would affects speed,
+ *  reduces flexibility and decreases flexibility. It works but don't use them.
  *
  *  Define your custom style in header.php instead.
  *
