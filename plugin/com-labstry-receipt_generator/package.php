@@ -2,11 +2,10 @@
 
 /* Define Package configurations */
 return array(
-    'package_name' => 'Labstry LMS Core',
-    'package_namespace' => "com\labstry\lms_core",
+    'package_name' => 'Receipt Generator',
+    'package_namespace' => 'com\labstry\receipt_generator',
     'version' => '0.0.1-alpha',
-    'type' => array('admin', 'users'),
+    'type' => array('admin'),
     'package_dir' => basename(__FILE__),
 );
-
 

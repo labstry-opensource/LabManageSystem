@@ -17,3 +17,7 @@ function getFooter($theme_name = null, $page_name = null){
         include_once ROOT_DIR . '/theme/' . ACTIVE_THEME . '/footer.php';
     }
 }
+
+function getHome($path = null){
+    return BASE_PATH . (!empty($path) ? '/' . $path: '/');
+}

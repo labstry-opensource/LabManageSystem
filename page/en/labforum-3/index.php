@@ -2,7 +2,10 @@
 
 $current_version = '3.0.5-Alpha';
 
+enqueue_style(BASE_PATH . htmlspecialchars('/css/main.css'), 'labforum-3-main');
+
 getHeader();
+
 ?>
 <div class="forum-wrapper overflow-hidden">
     <section class="container-xxl title-section">

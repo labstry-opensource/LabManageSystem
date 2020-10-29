@@ -3,6 +3,7 @@
 include_once dirname(__FILE__) . '/functions.php';
 include_once ROOT_DIR . '/src/Router.php';
 
+
 /*
  * Note that you should have page struct like this so that my router can handle the redirect.
  * /page
