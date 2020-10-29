@@ -20,7 +20,7 @@ if(count(explode(DIRECTORY_SEPARATOR, $_SERVER['REQUEST_URI'])) >= 3){
     defined('BASE_PATH') || define('BASE_PATH', str_replace(DIR, '', ROOT_DIR));
 }
 else{
-    defined('BASE_PATH') || define('BASE_PATH', dirname($_SERVER['REQUEST_URI']));
+    defined('BASE_PATH') || define('BASE_PATH', '');
 }
 defined('APP_PATH') || define('APP_PATH', $_SERVER['REQUEST_URI']);
 
