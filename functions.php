@@ -15,14 +15,14 @@ defined('DIR') || define('DIR', dirname(__DIR__));
 /*  Check whether it is on root directory to decide it's base path
  *  !! Always check if you are getting the right thing.
  */
-$dir_count = count(explode(DIRECTORY_SEPARATOR, str_replace(DIR, '', ROOT_DIR)));
-if($dir_count > 2){
+
+if(count(explode(DIRECTORY_SEPARATOR, $_SERVER['REQUEST_URI'])) >= 3){
     defined('BASE_PATH') || define('BASE_PATH', str_replace(DIR, '', ROOT_DIR));
-}else{
-    defined('BASE_PATH') || define('BASE_PATH', '/');
+}
+else{
+    defined('BASE_PATH') || define('BASE_PATH', dirname($_SERVER['REQUEST_URI']));
 }
 defined('APP_PATH') || define('APP_PATH', $_SERVER['REQUEST_URI']);
-
 
 defined('ACTIVE_THEME') || define('ACTIVE_THEME', 'labstry-mainsite');
 
