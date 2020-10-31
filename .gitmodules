@@ -1,0 +1,3 @@
+[submodule "theme/labstry-mainsite"]
+	path = theme/labstry-mainsite
+	url = git@gitlab.com:labstry/labstry-mainsite.git
