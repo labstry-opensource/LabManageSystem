@@ -18,6 +18,6 @@ function getFooter($theme_name = null, $page_name = null){
     }
 }
 
-function getHome($path = null){
-    return BASE_PATH . (!empty($path) ? '/' . $path: '/');
+function getHome($language= 'en', $path = null){
+    return BASE_PATH . '/' . $language  .(!empty($path) ? '/' . $path: '/');
 }

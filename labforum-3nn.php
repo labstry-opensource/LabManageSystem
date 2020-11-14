@@ -107,7 +107,6 @@ $current_version = '3.0.5-Alpha';
 
 </footer>
 </body>
-<script src="https://www.unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
 <script>
 
     //Global VARIABLES FOR HOUR / MINUTE

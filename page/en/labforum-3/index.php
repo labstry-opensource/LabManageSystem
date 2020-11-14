@@ -3,6 +3,7 @@
 $current_version = '3.0.5-Alpha';
 
 enqueue_style(BASE_PATH . htmlspecialchars('/css/main.css'), 'labforum-3-main');
+enqueue_style();
 
 getHeader();
 
@@ -71,10 +72,6 @@ getHeader();
     </section>
     <section class="a-forum-that-keeps-updated bg-young-pink py-5">
         <div class="container text-center color-white">
-            <div class="clock-container">
-                <canvas id="canvas" class="update-clock" width="300" height="300"></canvas>
-            </div>
-
             <h2 class="banger">It's a LIVE Forum Engine.</h2>
             <article>
                 <p>The forum is an app that updates monthly. Don't get the feature you wanted ?</p>
@@ -110,118 +107,5 @@ getHeader();
 
 </footer>
 </body>
-<script src="https://www.unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
-<script>
 
-    //Global VARIABLES FOR HOUR / MINUTE
-    var hour = 0;
-    var minute = 0;
-    var second = 0;
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-    var radius = canvas.height / 2;
-    ctx.translate(radius, radius);
-    radius = radius * 0.90;
-
-
-    $.fn.isInViewport = function () {
-        let elementTop = $(this).offset().top;
-        let elementBottom = elementTop + $(this).outerHeight();
-
-        let viewportTop = $(window).scrollTop();
-        let viewportBottom = viewportTop + $(window).height();
-
-        return elementBottom > viewportTop && elementTop < viewportBottom;
-    };
-
-
-    function animateSpeedCounter(){
-        if ($('.loads-faster-section').isInViewport() && !$('.speed-animate-class').hasClass('animated')) {
-            var self = $('.speed-counter');
-            $({ Counter: 0 }).animate({ Counter: self.data('target') }, {
-                duration: 500,
-                easing: 'swing',
-                step: function () {
-                    self.text(Math.ceil(this.Counter));
-                    $('.progress-bar').css('width', (Math.ceil(this.Counter) / self.data('target') * 100) +
-                        '%');
-                }
-            }).promise().done(function(){
-                self.text('200');
-                $('.speed-animate-class').addClass('animated');
-            });
-        }
-    }
-
-    function drawClock() {
-        drawClockFace(ctx, radius);
-        drawTime(ctx, radius);
-    }
-
-    function drawClockFace(){
-
-        ctx.beginPath();
-        ctx.arc(0, 0, radius, 0 , 2 * Math.PI);
-        ctx.fillStyle = 'hotpink';
-        //ctx.lineWidth = 10;
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(0, 0, radius, 0 , 2 * Math.PI);
-        ctx.fillStyle = '#fff';
-        ctx.lineWidth = 10;
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
-        ctx.fillStyle = '#fff';
-        ctx.fill();
-
-    }
-
-
-    function drawTime() {
-        //hour
-        var inner_hour = hour%12;
-        inner_hour =(inner_hour*Math.PI/6)+
-            (minute*Math.PI/(6*60));
-        drawHand(ctx, inner_hour, radius*0.5, radius*0.07);
-        //minute
-        var inner_minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
-        drawHand(ctx, inner_minute, radius*0.8, radius*0.07);
-    }
-
-    function drawHand(ctx, pos, length, width) {
-        ctx.beginPath();
-        ctx.lineWidth = width;
-        ctx.lineCap = "round";
-        ctx.strokeStyle = '#fff';
-        ctx.moveTo(0,0);
-        ctx.rotate(pos);
-        ctx.lineTo(0, -length);
-        ctx.stroke();
-        ctx.rotate(-pos);
-    }
-    setInterval(function(){
-        if(minute === 59 && hour <= 11 ) {
-            hour++;
-            minute = 0;
-            clearInterval();
-        }
-        else if(minute < 59) {
-            minute++;
-        }
-        //console.log(hour + '' + minute + '' + second)
-        drawClock();
-    }, .5);
-
-
-
-    $(window).scroll(function () {
-        animateSpeedCounter();
-    });
-
-
-
-</script>
 </html>

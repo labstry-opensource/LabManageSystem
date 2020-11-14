@@ -1,5 +1,6 @@
 <?php
-include_once dirname(__FILE__) . '/header.php';
+enqueue_style(BASE_PATH . '/theme/labstry-mainsite/css/solutions.css', 'solution-3');
+getHeader();
 ?>
 <div class="position-absolute" style="right: 1rem; top: .5rem">
     <a href="#contactModal"
