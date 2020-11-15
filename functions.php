@@ -18,7 +18,7 @@ defined('DIR') || define('DIR', dirname(__DIR__));
 defined('APP_PATH') || define('APP_PATH', dirname($_SERVER['SCRIPT_FILENAME']));
 defined('BASE_PATH') || define('BASE_PATH', str_replace($_SERVER['DOCUMENT_ROOT'], '', APP_PATH));
 
-
+defined('DEFAULT_LANG') || define('DEFAULT_LANG', 'en');
 defined('ACTIVE_THEME') || define('ACTIVE_THEME', 'labstry-mainsite');
 
 $core_list = glob(ROOT_DIR . '/plugin/com-labstry-lms_core/*');

@@ -3,7 +3,6 @@
 include_once dirname(__FILE__) . '/functions.php';
 include_once ROOT_DIR . '/src/Router.php';
 
-
 /*
  * Note that you should have page struct like this so that my router can handle the redirect.
  * /page
@@ -64,7 +63,7 @@ function get_default_template($page_stack, $page_var){
 
 $router->route(BASE_PATH . "/(?!({$lang_join}))", function () {
     global $uri_split;
-    header('Location: '. BASE_PATH .'/en/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
+    header('Location: '. BASE_PATH .'/' . DEFAULT_LANG . '/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
 });
 
 
@@ -82,7 +81,13 @@ $router->route(BASE_PATH . "/{$lang_join}", function($language){
     header('Location: '. BASE_PATH . "/{$language}/" . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
 });
 
-$router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)/", function ($language, $page){
+
+$router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)([/]*)", function ($language, $page, $slash){
+    //Handle if user didn't add slash to their final directory
+    if(empty($slash)){
+        header('Location: '. BASE_PATH . "/{$language}/" . $page . '/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
+    }
+
     global $connection;
     global $page_language;
     $page_language = $language;
@@ -101,9 +106,9 @@ $router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)/", function ($language, $pa
     http_response_code(404);
 });
 
-$router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)", function ($language, $path){
-    global $uri_split;
-    header('Location: '. BASE_PATH . "/{$language}/" . $path . '/' . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
+
+$router->route(BASE_PATH . '/([\w/-]+?)/', function($page){
+    header('Location: '. BASE_PATH . '/'. DEFAULT_LANG . '/'. $page . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
 });
 
 

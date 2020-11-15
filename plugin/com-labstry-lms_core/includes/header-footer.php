@@ -18,6 +18,10 @@ function getFooter($theme_name = null, $page_name = null){
     }
 }
 
-function getHome($language= 'en', $path = null){
+function getUrl($language= 'en', $path = null){
     return BASE_PATH . '/' . $language  .(!empty($path) ? '/' . $path: '/');
+}
+
+function getHome($language = 'en'){
+    return getUrl($language);
 }
