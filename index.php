@@ -26,12 +26,11 @@ $lang_join = '(' . implode('|', $avail_langs) . ')';
 $router = new Router();
 
 function get_campaign_template_dir($language = 'en', $page_name = null){
-    return dirname(__FILE__ ) . '/page/' . $language. '/'. (!empty($page_name) ? $page_name : '') . '/index.php';
+    return dirname(__FILE__ ) . '/theme/'. ACTIVE_THEME . '/page/' . $language. '/'. (!empty($page_name) ? $page_name : '') . '/index.php';
 }
 
 function get_campaign_template($lang, $page_slug_name, $page_slug, $parent_slug){
     //Before we include the file, let's check whether we could get variables from the database
-
     if(!file_exists(get_campaign_template_dir($lang, $page_slug_name))){
        return false;
     }
@@ -73,14 +72,12 @@ $router->route(BASE_PATH . "/(?!({$lang_join}))", function () {
  * */
 
 
-$router->route(BASE_PATH . "/{$lang_join}/", function($language){
-    include ROOT_DIR . "/page/{$language}/index.php";
+$router->route(BASE_PATH . "/({$lang_join})([/]*)", function($language, $slash){
+    if(empty($slash)){
+        header('Location: '. BASE_PATH . "/{$language}/" . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
+    }
+    include ROOT_DIR . '/theme/' . ACTIVE_THEME . "/page/{$language}/index.php";
 });
-
-$router->route(BASE_PATH . "/{$lang_join}", function($language){
-    header('Location: '. BASE_PATH . "/{$language}/" . (isset($uri_split[1]) ? '?' . $uri_split[1] : null));
-});
-
 
 $router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)([/]*)", function ($language, $page, $slash){
     //Handle if user didn't add slash to their final directory

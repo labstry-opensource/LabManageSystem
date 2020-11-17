@@ -1,6 +1,29 @@
 <?php
 
-function getHeader($language = 'en', $theme_name = null, $page_name = null){
+global $_lms_page_title;
+global $_lms_header_items;
+
+$_lms_header_items = array();
+
+function setPageTitle($title_name){
+    global $_lms_page_title;
+    $_lms_page_title = $title_name;
+}
+
+function setMenu($menu_name, $menu_items){
+    /* Add items to the menu array using key */
+    global $_lms_header_items;
+    $_lms_header_items[$menu_name] = $menu_items;
+}
+
+function getMenu($menu_name){
+    global $_lms_header_items;
+    return $_lms_header_items[$menu_name];
+}
+
+function getHeader($language = 'en', $theme_name = null, $page_title = null){
+    global $_lms_page_title;
+    $_lms_page_title = $page_title;
     if(!empty($theme_name) && file_exists(ROOT_DIR . '/theme/' . $theme_name . '/header.php')){
         include_once ROOT_DIR . '/theme/' . $theme_name . '/header.php';
     }
@@ -25,3 +48,4 @@ function getUrl($language= 'en', $path = null){
 function getHome($language = 'en'){
     return getUrl($language);
 }
+

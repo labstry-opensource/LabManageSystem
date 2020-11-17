@@ -1,12 +1,7 @@
 <?php
 enqueue_style(BASE_PATH . '/theme/labstry-mainsite/css/solutions.css', 'solution-3');
-getHeader();
+getHeader(null, null, 'Labstry Solutions');
 ?>
-<div class="position-absolute" style="right: 1rem; top: .5rem">
-    <a href="#contactModal"
-       data-toggle="modal"
-       class="btn btn-success font-weight-bold cta-button">Contact Us</a>
-</div>
 <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -37,69 +32,80 @@ getHeader();
         <h1 class="font-weight-bold">Labstry Web Solution</h1>
         <h2 class="h2 text-white">A web solution that powers your business.</h2>
         <h3 class="h6 text-white">Price subject to change according to requirements.</h3>
+        <a href="#contactModal"
+           data-toggle="modal"
+           class="btn btn-success btn-cta font-weight-bold font-weight-bold">Contact Us</a>
     </div>
 
 </div>
 <div class="" style="margin-top: -110px;">
-    <div class="slick-slider">
-        <div class="card mx-3">
-            <div class="card-header py-3">
-                <h5 class="my-0 font-weight-normal text-center">Static Website</h5>
-                <div class="d-flex justify-content-center">
-                    <div class="h1 font-weight-bold text-center text-danger">
-                        £479
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 my-3">
+                <div class="card mx-3">
+                    <div class="card-header py-3">
+                        <h5 class="my-0 font-weight-normal text-center">Static Website</h5>
+                        <div class="d-flex justify-content-center">
+                            <div class="h1 font-weight-bold text-center text-danger">
+                                £479
+                            </div>
+                            <span class="align-self-end">up /page (inc. VAT)</span>
+                        </div>
                     </div>
-                    <span class="align-self-end">up /page (inc. VAT)</span>
+                    <div class="card-body">
+                        <h5 class="card-title">Included: </h5>
+                        <ul>
+                            <li>Responsive page - 3 sizes (mobiles, tablet, desktop)</li>
+                            <li>Accessibility</li>
+                            <li>One year 9-5 Support for website</li>
+                            <li>Full website ownership</li>
+                            <li>Man Hours / Month / Week Guarantee</li>
+                        </ul>
+                        <h5 class="card-title">Value added items: </h5>
+                        <ul>
+                            <li>SEO Optimisation</li>
+                            <li>Google Analytics</li>
+                            <li>Facebook Analytics</li>
+                            <li>Assembling of Animated Graphics &lt;canvas&gt;</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">Included: </h5>
-                <ul>
-                    <li>Responsive page - 3 sizes (mobiles, tablet, desktop)</li>
-                    <li>Accessibility</li>
-                    <li>One year 9-5 Support for website</li>
-                    <li>Full website ownership</li>
-                    <li>Man Hours / Month / Week Guarantee</li>
-                </ul>
-                <h5 class="card-title">Value added items: </h5>
-                <ul>
-                    <li>SEO Optimisation</li>
-                    <li>Google Analytics</li>
-                    <li>Facebook Analytics</li>
-                    <li>Assembling of Animated Graphics &lt;canvas&gt;</li>
-                </ul>
-            </div>
-        </div>
-        <div class="card mx-3">
-            <div class="card-header py-3">
-                <h5 class="my-0 font-weight-normal text-center">Dynamic website with WordPress</h5>
-                <div class="d-flex justify-content-center">
-                    <div class="h1 font-weight-bold text-center text-danger">
-                        £671
-                    </div>
-                    <span class="align-self-end">up /page&nbsp;(inc. VAT)</span>
-                </div>
+            <div class="col-12 col-md-6 my-3">
+                <div class="card mx-3">
+                    <div class="card-header py-3">
+                        <h5 class="my-0 font-weight-normal text-center">Dynamic website with WordPress</h5>
+                        <div class="d-flex justify-content-center">
+                            <div class="h1 font-weight-bold text-center text-danger">
+                                £671
+                            </div>
+                            <span class="align-self-end">up /page&nbsp;(inc. VAT)</span>
+                        </div>
 
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Included: </h5>
-                <ul>
-                    <li>items with static website</li>
-                    <li>Wordpress Content Management System (CMS)</li>
-                    <li>Website deployment</li>
-                </ul>
-                <h5 class="card-title">Value added items: </h5>
-                <ul>
-                    <li>SEO Optimisation</li>
-                    <li>Google Analytics</li>
-                    <li>Facebook Analytics</li>
-                    <li>Assembling of Animated Graphics &lt;canvas&gt;</li>
-                    <li>Custom API powered Backend</li>
-                    <li>Easily updated</li>
-                </ul>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Included: </h5>
+                        <ul>
+                            <li>items with static website</li>
+                            <li>Wordpress Content Management System (CMS)</li>
+                            <li>Website deployment</li>
+                        </ul>
+                        <h5 class="card-title">Value added items: </h5>
+                        <ul>
+                            <li>SEO Optimisation</li>
+                            <li>Google Analytics</li>
+                            <li>Facebook Analytics</li>
+                            <li>Assembling of Animated Graphics &lt;canvas&gt;</li>
+                            <li>Custom API powered Backend</li>
+                            <li>Easily updated</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
     <div class="d-flex justify-content-center">
         <a href="#contactModal"
            data-toggle="modal"
@@ -108,16 +114,18 @@ getHeader();
     <div class="bg-dark">
         <div class="container">
             <div class="section-row row py-5 align-items-center" style="min-height: 500px">
-                <article class="col-12 col-md-6">
-                    <p class="h1 text-light font-weight-bold">You design, we create.</p>
-                    <p class="py-3 text-light">
-                        Kickstarting a site with a simple click.
-                        By sending us your website design, we could start developing the site right away.
-                    </p>
-                    <a href="#contactModal"
-                       data-toggle="modal"
-                       class="btn btn-success font-weight-bold cta-button">Contact US</a>
-                </article>
+                <div class="col-12 col-md-6">
+                    <h2 class="h1 text-light font-weight-bold">You design, we create.</h2>
+                    <article>
+                        <p class="py-3 text-light">
+                            With Labstry Solutions, you can kickstart a site with a simple click.
+                            By sending us your website design, we could start developing the site right away.
+                        </p>
+                        <a href="#contactModal"
+                           data-toggle="modal"
+                           class="btn btn-success font-weight-bold cta-button">Contact US</a>
+                    </article>
+                </div>
 
                 <div class="col-12 col-md-5">
                     <div class="text-right">
@@ -174,14 +182,17 @@ getHeader();
         <div class="bg-info section-row py-5 container"
              style="transform: rotate(3deg); border-radius: 20px; overflow: hidden">
             <div class="row align-items-center p-3 p-md-5"  style="transform: rotate(-3deg)">
-                <article class="col-12 col-md-6">
-                    <p class="h1 font-weight-bold text-light">Written by our team, updatable by you.</p>
-                    <p class="pt-3 font-weight-bold text-light">By choosing the WordPress CMS plan, you can choose what to display by using the Gutenburg
-                        What-You-See-Is-What-You-Get (WYSIWYG) editor, as well as Advanced Custom Fields (Purchased seperately) to add your own contents. </p>
-                    <a href="#contactModal"
-                       data-toggle="modal"
-                       class="my-5 btn btn-warning font-weight-bold cta-button">Get Add On Service From Us</a>
-                </article>
+                <div class="col-12 col-md-6">
+                    <h2 class="h1 font-weight-bold text-light">Written by our team, updatable by you.</h2>
+                    <article>
+                        <p class="pt-3 font-weight-bold text-light">By choosing the WordPress CMS plan, you can choose what to display by using the Gutenburg
+                            What-You-See-Is-What-You-Get (WYSIWYG) editor, as well as Advanced Custom Fields (Purchased seperately) to add your own contents. </p>
+                        <a href="#contactModal"
+                           data-toggle="modal"
+                           class="my-5 btn btn-warning font-weight-bold cta-button">Get Add On Service From Us</a>
+                    </article>
+
+                </div>
                 <div class="col-12 col-md-6">
                     <div class="px-5 text-right">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="256" viewBox="0 0 512 512">
