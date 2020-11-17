@@ -18,7 +18,7 @@ include_once ROOT_DIR . '/src/Router.php';
  * We are doing so to allow it to redirect when new language is created.
 */
 
-$avail_langs = array_map('basename', glob(ROOT_DIR . '/page/*', GLOB_ONLYDIR));
+$avail_langs = array_map('basename', glob(ROOT_DIR . '/theme/'. ACTIVE_THEME . '/page/*', GLOB_ONLYDIR));
 
 
 $lang_join = '(' . implode('|', $avail_langs) . ')';
