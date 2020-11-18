@@ -10,10 +10,10 @@ $is_log_in_page = isset($is_log_in_page) ? $is_log_in_page : false;
 
 
 if($is_log_in_page === false && empty($_SESSION['id'])){
-    header('Location:'. BASE_PATH. '/admin/login.php');
+    header('Location:'. BASE_PATH. '/login.php');
 }
 else if($is_log_in_page === true && !empty($_SESSION['id'])){
-    header('Location:'. BASE_PATH. '/admin/index.php');
+    header('Location:'. BASE_PATH. '/index.php');
 }
 ?>
 

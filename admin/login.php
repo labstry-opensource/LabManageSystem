@@ -8,7 +8,7 @@
 include_once dirname(__FILE__) . '/../functions.php';
 
 
-enqueue_style(BASE_PATH . '/css/admin.css', 'Admin Style');
+enqueue_style(BASE_PATH . '/../css/admin.css', 'Admin Style');
 enqueue_script(BASE_PATH . '/js/svg-transformer.js');
 
 $show_header = false;
@@ -49,7 +49,7 @@ include_once dirname(__FILE__) . '/view/admin-header.php';
                 </form>
             </div>
         </div>
-        <span class="d-block text-center pb-3 text-grey"><i><small>Let's create! Powered by LMS.</small></i></span>
+        <span class="d-block text-center pb-3 text-grey"><i><small>Powered by LabMS.</small></i></span>
     </div>
     <script>
         var base_path = <?php echo json_encode(BASE_PATH); ?>;

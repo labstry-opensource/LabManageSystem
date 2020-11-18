@@ -42,7 +42,7 @@ function getFooter($theme_name = null, $page_name = null){
 }
 
 function getUrl($language= 'en', $path = null){
-    return BASE_PATH . '/' . $language  .(!empty($path) ? '/' . $path: '/');
+    return BASE_PATH . (!empty($language) ? ( '/' . $language ) : '') .(!empty($path) ? '/' . $path : '/');
 }
 
 function getHome($language = 'en'){
