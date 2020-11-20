@@ -25,7 +25,7 @@ class ValidateLogin
     }
 
     public function validateEmptyPassword(){
-        return (empty($this->login_credentials['password']));
+        return (!empty($this->login_credentials['password']));
     }
 
     public function validatePassword(){

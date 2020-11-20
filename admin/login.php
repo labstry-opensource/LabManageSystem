@@ -6,24 +6,25 @@
  * */
 //get_header();
 include_once dirname(__FILE__) . '/../functions.php';
-
-
 enqueue_style(BASE_PATH . '/../css/admin.css', 'Admin Style');
 enqueue_script(BASE_PATH . '/js/svg-transformer.js');
 
+
+
 $show_header = false;
 $is_log_in_page = true;
-include_once dirname(__FILE__) . '/view/admin-header.php';
+include_once dirname(__FILE__) . '/view/login-header.php';
 
 ?>
     <div class="h-100 d-flex flex-column bg-pop-mosaic">
         <div class="d-flex flex-fill justify-content-center align-items-center">
             <div class="login-wrapper d-flex flex-column text-light">
                 <img class="svg-inline m-auto login-logo" src="<?php echo BASE_PATH . '/assets/lms-logo.svg'?>" alt="">
-                <form class="login-form" action="<?php echo BASE_PATH . '/api/login.php'?>" method="POST">
+                <form class="login-form" action="<?php echo BASE_PATH . '/../api/login.php'?>" method="POST">
                     <div class="p-2 my-3 bg-light text-pop-mosaic">
                         You must login before continue.
                     </div>
+                    <input type="hidden" name="login_role" value="admin">
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <div class="form-group mb-3">
@@ -56,12 +57,12 @@ include_once dirname(__FILE__) . '/view/admin-header.php';
         $('.login-form').on('submit', function(e){
             e.preventDefault();
             $.post($(this).attr('action'), $(this).serialize(), function(data){
-                if(data.data.success){
+                if(data.success){
                     window.location = base_path + '/admin/index.php';
                 }else{
-                    $.each(data.data.error, function(key, val){
-                        $('.form-control[name="'+ key +'"]').addClass('is-invalid')
-                            .siblings('.invalid-feedback').html(val);
+                    $.each(data.error, function(key, val){
+                        $('.form-control[name="'+ key +'"]').addClass('is-invalid');
+                        $('.form-control[name="'+ key +'"]').siblings('.invalid-feedback').html(val);
                     });
                 }
             })

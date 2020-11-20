@@ -47,9 +47,7 @@ else if($is_log_in_page === true && !empty($_SESSION['id'])){
     }
 </style>
 <body>
-<?php if($show_header){ ?>
 <div class="bg-pop-mosaic d-flex align-items-center" style="height: 50px">
     <img class="svg-inline h-100 py-2"  src="<?php echo BASE_PATH . '/assets/lms-logo.svg'?>" alt="">
     123
 </div>
-<?php } ?>

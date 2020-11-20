@@ -12,7 +12,7 @@ $apitools = new lms_core\APITools();
 
 if(empty($_POST)){
     $data['error']['form-data'] = 'No data inputted';
-    $apitools->outputJson($data);
+    $apitools->output($data);
 }
 
 $validator = new lms_core\validator\ValidateLogin($connection, $_POST);
@@ -32,7 +32,7 @@ if(!$validator->validateEmptyPassword()){
 perform_action('additional_credibility_challenge');
 
 if($data['error']){
-    $apitools->outputJson($data);
+    $apitools->output($data);
 }
 
 if(!isset($_SESSION)) session_start();
@@ -40,6 +40,9 @@ session_regenerate_id();
 
 $users = new lms_core\Users($connection);
 $_SESSION['id'] = $users->getUserIDByUsername($_POST['username']);
+
+$data['success'] = true;
+$apitools->output($data);
 
 
 
