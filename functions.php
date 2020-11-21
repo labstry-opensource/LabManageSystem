@@ -15,9 +15,9 @@ defined('DIR') || define('DIR', dirname(__DIR__));
 /*  Check whether it is on root directory to decide it's base path
  *  !! Always check if you are getting the right thing.
  */
+
 defined('APP_PATH') || define('APP_PATH', dirname($_SERVER['SCRIPT_FILENAME']));
 defined('BASE_PATH') || define('BASE_PATH', str_replace($_SERVER['DOCUMENT_ROOT'], '', APP_PATH));
-
 defined('DEFAULT_LANG') || define('DEFAULT_LANG', 'en');
 defined('ACTIVE_THEME') || define('ACTIVE_THEME', 'labstry-mainsite');
 
@@ -33,6 +33,10 @@ if(file_exists(ROOT_DIR . '/credentials.php')){
 //This package, which consists of essential toolkits, has fixed name.
 include ROOT_DIR . '/plugin/com-labstry-lms_core/loader.php';
 
+//Start SESSION if it is not started
+if(!isset($_SESSION)){
+    session_start();
+}
 
 //Load userspace functions.php. PLEASE DEFINE THEM IN THEME FOLDER, NOT HERE !!!
 if(file_exists(ROOT_DIR . '/theme/' . ACTIVE_THEME . '/functions.php')){

@@ -31,7 +31,7 @@ if(!$validator->validateEmptyPassword()){
 
 perform_action('additional_credibility_challenge');
 
-if($data['error']){
+if(!empty($data['error'])){
     $apitools->output($data);
 }
 
@@ -41,7 +41,7 @@ session_regenerate_id();
 $users = new lms_core\Users($connection);
 $_SESSION['id'] = $users->getUserIDByUsername($_POST['username']);
 
-$data['success'] = true;
+$data['success']['login'] = true;
 $apitools->output($data);
 
 

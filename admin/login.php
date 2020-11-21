@@ -5,11 +5,9 @@
  *
  * */
 //get_header();
-include_once dirname(__FILE__) . '/../functions.php';
+include_once dirname(__FILE__) . '/admin-functions.php';
 enqueue_style(BASE_PATH . '/../css/admin.css', 'Admin Style');
 enqueue_script(BASE_PATH . '/js/svg-transformer.js');
-
-
 
 $show_header = false;
 $is_log_in_page = true;
@@ -19,8 +17,8 @@ include_once dirname(__FILE__) . '/view/login-header.php';
     <div class="h-100 d-flex flex-column bg-pop-mosaic">
         <div class="d-flex flex-fill justify-content-center align-items-center">
             <div class="login-wrapper d-flex flex-column text-light">
-                <img class="svg-inline m-auto login-logo" src="<?php echo BASE_PATH . '/../assets/lms-logo.svg'?>" alt="">
-                <form class="login-form" action="<?php echo BASE_PATH . '/../api/login.php'?>" method="POST">
+                <img class="svg-inline m-auto login-logo w-100" src="<?php echo BASE_PATH . '/assets/lms-logo-white.svg'?>" alt="">
+                <form class="login-form" action="<?php echo BASE_PATH . '/api/login.php'?>" method="POST">
                     <div class="p-2 my-3 bg-light text-pop-mosaic">
                         You must login before continue.
                     </div>
@@ -50,7 +48,7 @@ include_once dirname(__FILE__) . '/view/login-header.php';
                 </form>
             </div>
         </div>
-        <span class="d-block text-center pb-3 text-grey"><i><small>Powered by LabMS.</small></i></span>
+        <span class="d-block text-center pb-3 text-grey"><i><small>Powered by Nightingale, product by Labstry.</small></i></span>
     </div>
     <script>
         var base_path = <?php echo json_encode(BASE_PATH); ?>;
@@ -65,7 +63,7 @@ include_once dirname(__FILE__) . '/view/login-header.php';
                         $('.form-control[name="'+ key +'"]').siblings('.invalid-feedback').html(val);
                     });
                 }
-            })
+            });
         });
     </script>
 

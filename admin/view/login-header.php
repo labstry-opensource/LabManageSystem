@@ -1,6 +1,6 @@
 <?php
 
-if(empty($_SESSION)) session_start();
+if(!isset($_SESSION)) session_start();
 
 global $_lms_styles;
 global $_lms_scripts;
@@ -9,11 +9,11 @@ $show_header = isset($show_header) ? $show_header : true;
 $is_log_in_page = isset($is_log_in_page) ? $is_log_in_page : false;
 
 
-if($is_log_in_page === false && empty($_SESSION['id'])){
-    header('Location:'. BASE_PATH. '/login.php');
+if(!$is_log_in_page && empty($_SESSION['id'])){
+    header('Location:'. BASE_PATH. '/admin/login.php');
 }
-else if($is_log_in_page === true && !empty($_SESSION['id'])){
-    header('Location:'. BASE_PATH. '/index.php');
+else if($is_log_in_page && !empty($_SESSION['id'])){
+    header('Location:'. BASE_PATH. '/admin/index.php');
 }
 ?>
 
@@ -39,7 +39,7 @@ else if($is_log_in_page === true && !empty($_SESSION['id'])){
             <?php } ?>
         <?php } ?>
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>LMS Admin</title>
+        <title>Nightingale</title>
     </head>
     <style>
         html,body {

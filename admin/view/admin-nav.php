@@ -10,11 +10,11 @@ $show_header = isset($show_header) ? $show_header : true;
 $is_log_in_page = isset($is_log_in_page) ? $is_log_in_page : false;
 
 
-if($is_log_in_page === false && empty($_SESSION['id'])){
-    header('Location:'. BASE_PATH. '/login.php');
+if(!$is_log_in_page && empty($_SESSION['id'])){
+    header('Location:'. BASE_PATH. '/admin/login.php');
 }
-else if($is_log_in_page === true && !empty($_SESSION['id'])){
-    header('Location:'. BASE_PATH. '/index.php');
+else if($is_log_in_page && !empty($_SESSION['id'])){
+    header('Location:'. BASE_PATH. '/admin/index.php');
 }
 
 $users = new \com\labstry\lms_core\Users($connection);
@@ -43,7 +43,7 @@ $user_arr = $users->getUserById($_SESSION['id']);
         <?php } ?>
     <?php } ?>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LMS Admin</title>
+    <title>Nightingale</title>
 </head>
 <style>
     html,body {
@@ -51,22 +51,4 @@ $user_arr = $users->getUserById($_SESSION['id']);
     }
 </style>
 <body>
-<div class="bg-pop-mosaic d-flex align-items-center" style="height: 50px">
-    <img class="svg-inline h-100 py-2"  src="<?php echo BASE_PATH . '/../assets/lms-logo.svg'?>" alt="">
-
-    <div class="ml-auto text-light">
-        <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                </svg>
-                <?php echo $user_arr['username'] ?>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="<?php echo BASE_PATH . '/../'?>">Logout</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </div>
-    </div>
-</div>
+<?php include ROOT_DIR . '/admin/widget/nav.php';

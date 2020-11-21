@@ -6,7 +6,7 @@ use com\labstry\lms_core;
 
 $apitools = new lms_core\APITools();
 
-session_start();
+if(!empty($_SESSION)) session_start();
 
 if(isset($_SESSION)){
     session_destroy();
