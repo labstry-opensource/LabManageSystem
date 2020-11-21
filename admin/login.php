@@ -19,7 +19,7 @@ include_once dirname(__FILE__) . '/view/login-header.php';
     <div class="h-100 d-flex flex-column bg-pop-mosaic">
         <div class="d-flex flex-fill justify-content-center align-items-center">
             <div class="login-wrapper d-flex flex-column text-light">
-                <img class="svg-inline m-auto login-logo" src="<?php echo BASE_PATH . '/assets/lms-logo.svg'?>" alt="">
+                <img class="svg-inline m-auto login-logo" src="<?php echo BASE_PATH . '/../assets/lms-logo.svg'?>" alt="">
                 <form class="login-form" action="<?php echo BASE_PATH . '/../api/login.php'?>" method="POST">
                     <div class="p-2 my-3 bg-light text-pop-mosaic">
                         You must login before continue.

@@ -16,7 +16,7 @@ class Users
 
     function getUserById($userid)
     {
-        return $this->connection->select($this->user_table_name, '*',  [
+        return $this->connection->get($this->user_table_name, '*',  [
             'id' => $userid
         ]);
     }
