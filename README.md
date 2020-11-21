@@ -1,4 +1,4 @@
-# Using LMS
+# Using Nightingale
 Make sure credentials.php file is present for accessing the DB. Define the db connection constants in `credentials.php` as follows:
 
 `<?php`  
