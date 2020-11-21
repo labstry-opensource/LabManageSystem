@@ -21,10 +21,12 @@
 </div>
 
 <script>
-    $('.dropdown-item.logout-item').on('click', function(e){
+    $('.dash-preview .dropdown-item.logout-item').on('click', function(e){
         e.preventDefault();
         $.get($(this).attr('href'), function(){
-            $('.admin-nav.admin-nav-holder').remove();
+            $('.admin-nav.admin-nav-holder').animate({height: '0px'}, 1000, function(){
+                $(this).remove();
+            });
         });
     })
 </script>
