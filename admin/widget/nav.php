@@ -1,9 +1,22 @@
+<?php
+
+$is_in_dashboard = isset($is_in_dashboard) ? $is_in_dashboard : true;
+?>
+
 <div class="bg-pop-mosaic d-flex align-items-center admin-nav admin-nav-holder" style="height: 40px">
     <a href="<?php echo BASE_PATH . '/admin/' ?>" class="d-inline">
         <span class="visually-hidden sr-only">Nightingale</span>
         <img class="h-100 py-2 px-3" style="max-height: 40px" src="<?php echo BASE_PATH . '/assets/lms-logo-white.svg'?>" alt="">
     </a>
-
+    <?php if($is_in_dashboard){ ?>
+    <a href="<?php echo getHome() ?>" class="btn text-light">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+            <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+        </svg>
+        Preview
+    </a>
+    <?php } ?>
 
     <div class="ml-auto text-light">
         <div class="dropdown">

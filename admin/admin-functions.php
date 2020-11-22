@@ -20,3 +20,5 @@ include ROOT_DIR . '/plugin/com-labstry-lms_core/loader.php';
 if(!isset($_SESSION)){
     session_start();
 }
+
+include_once ROOT_DIR . '/admin/include/sidenav-items.php';
