@@ -13,12 +13,12 @@ if(file_exists(ROOT_DIR . '/credentials.php')){
     //header('Location:' . BASE_PATH . '/installer/labstry-installer.php');
 }
 
-//This package, which consists of essential toolkits, has fixed name.
+//Load System Plugins
 include ROOT_DIR . '/plugin/com-labstry-lms_core/loader.php';
+include ROOT_DIR . '/plugin/com-labstry-nightingale/loader.php';
+
 
 //Start SESSION if it is not started
 if(!isset($_SESSION)){
     session_start();
 }
-
-include_once ROOT_DIR . '/admin/include/sidenav-items.php';

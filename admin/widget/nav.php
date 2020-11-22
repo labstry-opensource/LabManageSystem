@@ -1,5 +1,8 @@
 <?php
 
+if(!defined('BASE_PATH')) {
+    die('Direct access not permitted');
+}
 $is_in_dashboard = isset($is_in_dashboard) ? $is_in_dashboard : true;
 ?>
 

@@ -32,4 +32,10 @@ class Pages
     public function getParentPage($slug){
 
     }
+
+    public function getAllPages($language){
+        return $this->connection->select('lms_page', '*', [
+            'locale[=]' => $language
+        ]);
+    }
 }
