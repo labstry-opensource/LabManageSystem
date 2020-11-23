@@ -50,6 +50,7 @@ function get_campaign_template($lang, $page_slug_name, $page_slug, $parent_slug)
 function get_default_template($page_stack, $page_var){
     $field = $page_var['custom_fields'];
     $content = $page_var['content'];
+    $title = $page_var['title'];
     include_once dirname(__FILE__) . '/theme/' . ACTIVE_THEME . '/default-page.php';
 }
 
@@ -95,7 +96,7 @@ $router->route(BASE_PATH . "/{$lang_join}/([\w/-]+?)([/]*)", function ($language
     if(!get_campaign_template($language, $page, $page_slug, $page_parent_slug )){
         $pages = new \com\labstry\lms_core\Pages($connection);
         if($pages->checkHasPageBySlug($language, $page_parent_slug, $page_slug)){
-            $page_arr = $pages->getPagePropBySlug($page_slug);
+            $page_arr = $pages->getPagePropBySlug($language, $page_parent_slug, $page_slug);
             get_default_template($page, $page_arr);
             die;
         }

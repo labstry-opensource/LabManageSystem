@@ -6,6 +6,10 @@
  *
  * */
 
+if(!defined('BASE_PATH')) {
+    die('Direct access not permitted');
+}
+
 global $_lms_action_arr;
 $_lms_action_arr = array();
 

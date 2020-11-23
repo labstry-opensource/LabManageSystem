@@ -1,5 +1,9 @@
 <?php
 
+if(!defined('BASE_PATH')) {
+    die('Direct access not permitted');
+}
+
 function getFolderSize(...$directory){
     $file_size = 0;
     foreach($directory as $directory_item){

@@ -1,5 +1,9 @@
 <?php
 
+if(!defined('BASE_PATH')) {
+    die('Direct access not permitted');
+}
+
 global $_lms_admin_page_tabs;
 
 $_lms_admin_page_tabs = array();

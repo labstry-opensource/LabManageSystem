@@ -33,9 +33,18 @@ class Pages
 
     }
 
-    public function getAllPages($language){
-        return $this->connection->select('lms_page', '*', [
-            'locale[=]' => $language
-        ]);
+    public function getPages($language = null){
+        if(!empty($language)){
+            $where_arr = [
+                'locale[=]' => $language,
+            ];
+        }else{
+            $where_arr = array();
+        }
+        return $this->connection->select('lms_page', '*', $where_arr);
+    }
+
+    public function getFSPages($language = null){
+
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
+if(!defined('BASE_PATH')) {
+    die('Direct access not permitted');
+}
+
 use \com\labstry\lms_core;
 
 /* Get connection by declaring global connection site-wide */

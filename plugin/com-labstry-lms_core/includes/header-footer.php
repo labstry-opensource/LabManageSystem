@@ -1,5 +1,9 @@
 <?php
 
+if(!defined('BASE_PATH')) {
+    die('Direct access not permitted');
+}
+
 global $_lms_page_title;
 global $_lms_header_items;
 
