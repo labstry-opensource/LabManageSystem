@@ -6,7 +6,7 @@ if(!defined('BASE_PATH')) {
 $is_in_dashboard = isset($is_in_dashboard) ? $is_in_dashboard : true;
 ?>
 
-<div class="bg-pop-mosaic d-flex align-items-center admin-nav admin-nav-holder" style="height: 40px">
+<div class="bg-pop-mosaic d-flex align-items-center admin-nav admin-nav-holder position-fixed w-100" style="height: 40px; top: 0">
     <a href="<?php echo BASE_PATH . '/admin/' ?>" class="d-inline">
         <span class="visually-hidden sr-only">Nightingale</span>
         <img class="h-100 py-2 px-3" style="max-height: 40px" src="<?php echo BASE_PATH . '/assets/lms-logo-white.svg'?>" alt="">
@@ -34,6 +34,9 @@ $is_in_dashboard = isset($is_in_dashboard) ? $is_in_dashboard : true;
             </div>
         </div>
     </div>
+</div>
+<div class="" style="height:40px">
+    <!--Placeholder -->
 </div>
 
 <script>

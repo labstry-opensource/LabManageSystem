@@ -7,7 +7,7 @@ enqueue_script(BASE_PATH . '/../js/svg-transformer.js');
 
 include_once dirname(__FILE__) . '/view/admin-nav.php';
 
-include_once dirname(__FILE__) . '/view/page-frame.php';
+getAdminPageFrame();
 ?>
 
 <?php

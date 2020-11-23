@@ -5,6 +5,7 @@ if(!defined('BASE_PATH')) {
 }
 
 $installed_plugin_dir = array_map('basename',glob(ROOT_DIR . '/plugin/*'));
+$nightingale_total_size = getFolderSize(ROOT_DIR);
 
 $plugin_arr = array();
 
@@ -18,14 +19,40 @@ foreach($installed_plugin_dir as $dir){
         'userspace' => $plugin_details['type'],
         'author' => empty($plugin_details['author']) ? 'Unknown developer' : $plugin_details['author'],
         'package_dir' => $plugin_details['package_dir'],
-        'size' => getHumanReadableFileSize(getPluginDir() . '/' . $dir),
-    );
+        'size' => getHumanReadableFileSize(getPluginDir() . '/' . $dir,
+            ROOT_DIR . '/src/' . str_replace('\\', '/',$plugin_details['package_namespace'])),
+        'size_raw' => getFolderSize(getPluginDir() . '/'. $dir,
+            ROOT_DIR . '/src/' . str_replace('\\', '/',$plugin_details['package_namespace'])),
 
+    );
 }
+
+$space_usage_chart_data = getTopThreePluginSpaceUsage($plugin_arr, $nightingale_total_size);
+$system_usage = getSystemSpaceInPlugins($space_usage_chart_data);
+
 ?>
 <div class="p-3">
     <h2 class="h3">Plugins</h2>
-    <?php echo disk_free_space('/'); ?>
+    <div class="py-3">
+        <div>Space Usage on Plugins</div>
+        <div class="progress">
+            <?php foreach ($space_usage_chart_data as $item){ ?>
+                <div class="progress-bar <?php echo $item['color']?>" role="progressbar"
+                     title="<?php echo $item['name'] . ' - ' . $item['percentage']. '%'; ?>"
+                     data-toggle="tooltip" data-placement="bottom"
+                     style="width: <?php echo $item['percentage']?>%" aria-valuenow="<?php echo $item['percentage']?>" aria-valuemin="0" aria-valuemax="100">
+                    <?php echo $item['name']; ?>
+                </div>
+            <?php } ?>
+            <div class="progress-bar bg-secondary"
+                 data-toggle="tooltip" data-placement="bottom"
+                 title="<?php echo 'System - ' . $system_usage. '%'; ?>"
+                 role="progressbar" style="width: <?php echo $system_usage; ?>%" aria-valuenow="<?php echo $system_usage; ?>" aria-valuemin="0" aria-valuemax="100">
+                System
+            </div>
+        </div>
+    </div>
+
     <ul class="list-unstyled">
         <?php foreach($plugin_arr as $plugin_item){ ?>
             <li class="py-3">
@@ -40,3 +67,14 @@ foreach($installed_plugin_dir as $dir){
         <?php } ?>
     </ul>
 </div>
+<script>
+    //Enable Tooltip
+    $(document).ready(function(){
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+
+
+</script>

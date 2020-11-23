@@ -30,7 +30,7 @@ function get_campaign_template_dir($language = 'en', $page_name = null){
 }
 
 function get_campaign_template($lang, $page_slug_name, $page_slug, $parent_slug){
-    //Before we include the file, let's check whether we could get variables from the database
+    //Before we includes the file, let's check whether we could get variables from the database
     if(!file_exists(get_campaign_template_dir($lang, $page_slug_name))){
        return false;
     }
