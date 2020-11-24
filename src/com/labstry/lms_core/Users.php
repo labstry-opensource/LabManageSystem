@@ -66,7 +66,7 @@ class Users
 
     function getUserRoles($userid)
     {
-        return $this->connection->select('lms_user', 'roles', [
+        return $this->connection->get( $this->user_table_name, 'roles', [
             'id[=]' => $userid,
         ]);
     }
