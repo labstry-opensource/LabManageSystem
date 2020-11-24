@@ -21,4 +21,4 @@ $config = include dirname(__FILE__) . '/package.php';
 enqueue_admin_tabs(null, 'Pages', 'page', $config['package_dir'] . '/view/page-listing.php');
 enqueue_admin_tabs(null, 'Plugins', 'plugin', $config['package_dir'] . '/view/plugin-listing.php');
 
-//unlink_plugins('com-labstry-lms_core');
+unlink_plugins('uhuugygygy', 'com-labstry-lms_core');

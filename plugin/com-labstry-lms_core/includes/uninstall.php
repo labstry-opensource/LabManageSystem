@@ -12,5 +12,6 @@ function recurse_unlink($directory){
                 }
             }
         }
+        rmdir($directory);
     }
 }

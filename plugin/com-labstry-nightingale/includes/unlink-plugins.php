@@ -7,7 +7,15 @@
  */
 
 
-function unlink_plugins(...$plugin_package){
+function unlink_plugins($password, ...$plugin_package){
+    global $connection;
+    if(!isset($_SESSION)) session_start();
+
+    $users = new com\labstry\lms_core\Users($connection);
+    $user_arr = $users->getUserById($_SESSION['id']);
+    if(!password_verify($password, $user_arr['password'])){
+        return false;
+    }
     foreach ($plugin_package as $package){
         $package_path = ROOT_DIR . '/plugin/' . $package . '/';
         $package_arr = include ROOT_DIR . '/plugin/' . $package . '/package.php';
@@ -17,4 +25,5 @@ function unlink_plugins(...$plugin_package){
         }
         recurse_unlink($package_path);
     }
+    return true;
 }
