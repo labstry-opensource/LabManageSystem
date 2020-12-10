@@ -33,6 +33,7 @@ if(file_exists(ROOT_DIR . '/credentials.php')){
 //Load System Plugins
 include ROOT_DIR . '/plugin/com-labstry-lms_core/loader.php';
 include ROOT_DIR . '/plugin/com-labstry-nightingale/loader.php';
+include ROOT_DIR . '/plugin/com-labstry-contact_form/loader.php';
 
 //Start SESSION if it is not started
 if(!isset($_SESSION)){

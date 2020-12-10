@@ -7,7 +7,6 @@
 //get_header();
 include_once dirname(__FILE__) . '/admin-functions.php';
 enqueue_style(BASE_PATH . '/../css/admin.css', 'Admin Style');
-enqueue_script(BASE_PATH . '/js/svg-transformer.js');
 
 $show_header = false;
 $is_log_in_page = true;

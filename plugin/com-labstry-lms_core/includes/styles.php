@@ -12,10 +12,18 @@ $_lms_scripts = array();
  *  Define your custom style in header.php instead.
  *
  * */
-function enqueue_style($link, $key){
+function enqueue_style($link, $key, $rel = null){
     //Use a key to enqueue version other than default
     global $_lms_styles;
-    $_lms_styles[$key] = $link;
+    if(empty($rel)){
+        $_lms_styles[$key] = $link;
+    }else{
+        $_lms_styles[$key] = array(
+            'link' => $link,
+            'rel' => $rel,
+        );
+    }
+
 }
 
 

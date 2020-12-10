@@ -20,8 +20,8 @@ if($users->getUserRoles($_SESSION['id']) !== 'admin'){
     $apitools->output($data);
 }
 
-$password = isset($_GET['password']) ? $_GET['password'] : '';
-$plugin_name = isset($_GET['plugin_namespace']) ? $_GET['plugin_namespace'] : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+$plugin_name = isset($_POST['plugin_namespace']) ? $_POST['plugin_namespace'] : '';
 
 if(empty($password)){
     $data['data']['error']['password'] = 'Password can\'t be empty!';
