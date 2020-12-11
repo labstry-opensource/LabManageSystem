@@ -29,7 +29,7 @@ $user_arr = $users->getUserById($_SESSION['id']);
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASE_PATH . '/css/admin.css' ?>">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <?php if(!empty($_lms_styles)){ ?>
         <?php foreach ($_lms_styles as $style){ ?>
             <link rel="stylesheet" href="<?php echo $style;?>">

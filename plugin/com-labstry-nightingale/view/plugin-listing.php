@@ -61,21 +61,26 @@ $system_usage = getSystemSpaceInPlugins($space_usage_chart_data);
         <?php foreach($plugin_arr as $plugin_item){ ?>
             <li class="py-3">
                 <div class="row align-itens-center">
-                    <div class="col-12 col-md-6 font-weight-bold">
+                    <div class="col-12 col-md-6 font-weight-bold fw-bold">
                         <div><?php echo $plugin_item['name']; ?></div>
                         <div><?php echo $plugin_item['author'] ?></div>
                     </div>
                     <div class="col-12 col-md-6 text-right">
-                        <form action="" class="d-inline-block" method="POST">
+                        <form action="" class="d-inline-block plugin-operation-form" method="POST">
                             <input type="hidden" name="package_name" value="<?php echo $plugin_item['package_dir']?>">
+
+                            <?php // We are using this to judge what package name is operating in FRONTEND UI Only ?>
+
+                            <input type="hidden" name="package_title" class="package_title" value="<?php echo $plugin_item['name']?>">
                             <?php
                             /* If the plugin states that it is a system plugin, then the button will not be shown.
                              * We can't guarantee that user won't show it by changing package config. Just let it be.
                              */
                             if(!isset($plugin_item['essential']) || $plugin_item['essential'] === false){ ?>
-                                <button class="btn btn-success" >Activate</button>
-                                <button class="btn btn-warning" <?php echo ($plugin_item['essential'])? 'disabled' : ''?>>Deactivate</button>
-                                <button class="btn btn-danger" <?php echo ($plugin_item['essential'])? 'disabled' : ''?>>Remove</button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#activateConfirmModal"
+                                        class="btn btn-success btn-active-plugin btn-plugin-operation" >Activate</button>
+                                <button type="button" class="btn btn-warning btn-deactivate-plugin btn-plugin-operation">Deactivate</button>
+                                <button type="button" class="btn btn-danger" <?php echo ($plugin_item['essential'])? 'disabled' : ''?>>Remove</button>
                             <?php } ?>
                         </form>
                     </div>
@@ -90,14 +95,44 @@ $system_usage = getSystemSpaceInPlugins($space_usage_chart_data);
         <?php } ?>
     </ul>
 </div>
+
+<div class="modal fade" id="activateConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Activate <span class="activate-dialog-plugin-name"></span>? </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                To activate the plugin, please input your password.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
+    var generic_api = <?php echo json_encode(BASE_PATH . '/api/generic.php')?> ;
     //Enable Tooltip
     $(document).ready(function(){
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
+        });
     });
 
+    //AJAX when click
+    $('.btn-active-plugin').on('click', function (e){
+        var activate_plugin_name = $(this).siblings('.package_title').val();
+        $('.activate-dialog-plugin-name').text(activate_plugin_name);
+        var post_action = '';
+        if($(this).hasClass('btn-active-plugin')){
+            post_action = '?__lms_action=activate-plugin';
+        }
+    })
 
 </script>

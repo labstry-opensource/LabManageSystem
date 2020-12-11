@@ -13,7 +13,7 @@ global $_lms_admin_page_tabs;
         <?php foreach($_lms_admin_page_tabs as $tab_item){ ?>
             <?php foreach ($tab_item as $priority => $item){ ?>
                 <li class="py-1 text-light d-flex align-items-center">
-                    <a class="btn w-100 text-left text-light text-decoration-none" href="<?php echo getHome('') . 'admin/?section=' . $item['tab_key'] ?>">
+                    <a class="btn w-100 text-start text-light text-decoration-none" href="<?php echo getHome('') . 'admin/?section=' . $item['tab_key'] ?>">
                         <img class="pr-3"
                              src="<?php echo (file_exists($item['tab_icon'])) ? $item['tab_icon']: getHome('/') . 'assets/admin/cross-white.svg'?>" alt="">
                         <?php echo $item['tab_name']; ?>
