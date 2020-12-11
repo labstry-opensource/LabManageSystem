@@ -16,7 +16,7 @@ class Plugin
         $this->connection = $connection;
     }
 
-    public function registerPlugin($plugin_name, $namespace, $description){
+    public function registerPlugin($plugin_name, $namespace){
         $this->setPluginName($plugin_name);
 
         //We aren't doing anything if the plugin is already registered in database.
@@ -30,7 +30,6 @@ class Plugin
             'plugin_name' => $plugin_name,
             'plugin_namespace' => $namespace,
             'activated' => 0,
-            'description' => htmlspecialchars($description),
             'installed_date' => date('Y-m-d H:i:s'),
         ]);
 
@@ -64,8 +63,8 @@ class Plugin
     }
 
     public function getActivatedPlugins(){
-        $this->connection->select($this->plugin_table_name, [
-            'plugin_name', 'plugin_description', 'installed_date',
+        return $this->connection->select($this->plugin_table_name, [
+            'plugin_name', 'installed_date',
         ], [
             'activated[=]' => 1,
         ]);
