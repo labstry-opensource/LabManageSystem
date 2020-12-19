@@ -66,9 +66,15 @@ class Users
 
     function getUserRoles($userid)
     {
-        return $this->connection->get( $this->user_table_name, 'roles', [
+        return $this->connection->get($this->user_table_name, 'roles', [
             'id[=]' => $userid,
         ]);
     }
 
+    function validateUserRole($userid, $target_role_names){
+        $user_role = $this->connection->get($this->user_table_name , 'roles', [
+            'id[=]' => $userid
+        ]);
+        return (is_array($target_role_names)) ? in_array($user_role, $target_role_names) : ($user_role === $target_role_names);
+    }
 }

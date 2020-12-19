@@ -8,14 +8,15 @@ use com\labstry\lms_core;
 
 $apitools = new lms_core\APITools();
 $users = new lms_core\Users($connection);
-
+$accessible_roles = 'admin';
 
 if(empty($_SESSION['id'])){
     $data['data']['error']['id'] = 'Please login before continue.';
     $apitools->output($data);
 }
 
-if($users->getUserRoles($_SESSION['id']) !== 'admin'){
+//We put the algorithm inside the Users Class to simplify code understanding
+if(!$users->validateUserRole($_SESSION['id'], $accessible_roles)){
     $data['data']['error']['id'] = 'You don\'t have sufficient rights';
     $apitools->output($data);
 }

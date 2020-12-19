@@ -40,7 +40,7 @@ session_regenerate_id();
 
 $users = new lms_core\Users($connection);
 $_SESSION['id'] = $users->getUserIDByUsername($_POST['username']);
-$_SESSION['roles'] = $users->getUserRoles($_POST['username']);
+$_SESSION['roles'] = $users->getUserRoles($_SESSION['id']);
 
 $data['success']['login'] = true;
 $apitools->output($data);

@@ -17,6 +17,11 @@ class APITools
 
     }
 
+    public function outputNoRightsToAccess(){
+        $data['error'] = 'You don\'t have sufficient rights. Please login and try again.';
+        $this->output($data);
+    }
+
     public function isAPIFileExistsInTheme($theme_name, $file_path_api)
     {
         return file_exists(ROOT_DIR . '/theme/' . $theme_name . '/api' . $file_path_api);

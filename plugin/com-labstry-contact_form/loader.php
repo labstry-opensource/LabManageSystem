@@ -14,6 +14,5 @@ foreach ($core_list as $list){
     if(file_exists($list)) include $list;
 }
 
-echo '1';
 
 //register_api('submit_form', dirname(__FILE__) . '/api/submit_form.php');

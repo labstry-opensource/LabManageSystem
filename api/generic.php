@@ -1,5 +1,4 @@
 <?php
-
 /* Load selected action functions via api manage */
 include_once dirname(__FILE__) .'/../functions.php';
 use com\labstry\lms_core;
@@ -18,6 +17,7 @@ if(!check_has_registered_api($requested_action)){
 if(!empty($data['data']['error'])){
     $apitools->output($data);
 }
+
 
 
 load_api($requested_action);
