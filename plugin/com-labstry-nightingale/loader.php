@@ -23,4 +23,5 @@ enqueue_admin_tabs(null, 'Plugins', 'plugin', $config['package_dir'] . '/view/pl
 
 register_api('remove-plugin', dirname(__FILE__) . '/api/remove-plugin.php');
 register_api('pages', dirname(__FILE__) . '/api/pages.php');
+register_api('pages-struct-edit', dirname(__FILE__) . '/api/pages-struct-edit.php');
 register_api('activate-plugin', dirname(__FILE__) . '/api/activate-plugin.php');

@@ -22,6 +22,38 @@ class APITools
         $this->output($data);
     }
 
+    public function multidimensionArrUnique($arr, $key){
+        $temp_array = array();
+        $i = 0;
+        $key_array = array();
+        foreach($arr as $val) {
+            if (!in_array($val[$key], $key_array)) {
+                $key_array[$i] = $val[$key];
+                $temp_array[$i] = $val;
+            }
+            $i++;
+        }
+        return $temp_array;
+    }
+
+    public function checkIdentification($accessible_roles){
+        global $connection;
+        if(empty($_SESSION['id'])){
+            $data['data']['error']['id'] = 'Please login before continue.';
+            $this->output($data);
+        }
+        $users = new Users($connection);
+
+        //We put the algorithm inside the Users Class to simplify code understanding
+        if(!$users->validateUserRole($_SESSION['id'], $accessible_roles)){
+            $data['data']['error']['id'] = 'You don\'t have sufficient rights';
+            $this->output($data);
+        }
+
+        return true;
+
+    }
+
     public function isAPIFileExistsInTheme($theme_name, $file_path_api)
     {
         return file_exists(ROOT_DIR . '/theme/' . $theme_name . '/api' . $file_path_api);

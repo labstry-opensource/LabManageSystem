@@ -6,117 +6,162 @@ if(!defined('BASE_PATH')) {
 
 
 ?>
-<div class="p-3">
-    <h2 class="h3">Page</h2>
+<div class="p-3 page-display">
+    <div class="title-operation">
+        <h2 class="h3">Page</h2>
+        <div class="">
+            <button class="btn btn-success btn-operation-toggle" id="btn-edit-toggle">
+                Edit
+            </button>
+            <button class="btn d-none btn-success btn-operation-toggle" id="btn-save-toggle">
+                Save
+            </button>
+        </div>
+    </div>
     <div class="pages-show-container py-4">
-        <div class="list-group mt-1">
-            <nested-page
-                    v-for="data in pages_data"
-                    v-if="pages_data !== null"
-                    v-bind:data="data"
-            ></nested-page>
+        <div class="list-group nested-items my-2" data-dir="/">
         </div>
     </div>
 </div>
 
-<script id="nested-page" type="text/html">
-    <div class="list-group-item nested_page_component nested-items filter">
-        <div v-if="data !== null" class="">
-            <div class="text-pop-mosaic">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        {{data.title}}
-                    </div>
-                    <div class="col-12 col-md-6 text-start text-md-end">
-                        <a v-bind:href="page_link_base + '&id=' + data.id"
-                           class="btn bg-pop-mosaic text-white">
-                            Edit
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                <path d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+<div class="modal fade" id="savingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Saving. Please wait..." aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
 
-
-                <div class="list-group mt-1">
-                    <nested-page v-if="data.pages !== null"
-                                 v-for="nested_page_data in data.pages"
-                                 v-bind:level="level+1"
-                                 v-bind:data="nested_page_data"></nested-page>
-                    <div v-if="data.pages == null" class="list-group-item nested_page_component nested-items"></div>
-                </div>
 
             </div>
         </div>
     </div>
-</script>
-<script>
-    Vue.component('nested-page', {
-        template: document.getElementById('nested-page').innerHTML,
-        props:{
-            level: {
-                type: Number,
-                default: 0,
-            },
-            data: {
-                type: Object,
-            }
-        },
-        data: function(){
-            return {
-                page_link_base: <?php echo json_encode(BASE_PATH. '/admin/?section=page_details'); ?>,
-            }
-        }
-    });
+</div>
+
+<?php
+    include ROOT_DIR . '/admin/widget/nested-pages.php';
+?>
+<script type="text/html" id="processNotice">
+    <div class="d-flex align-items-center p-3">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="ps-3">
+            Saving structure, please wait...
+        </div>
+    </div>
+
 </script>
 
+<script type="text/html" id="onSuccessNotice">
+    <div class="bg-success d-flex align-items-center text-light p-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+        </svg>
+        <div class="ps-3">
+            Your structure has been saved.
+        </div>
+    </div>
+</script>
+
 <script>
-    var pageViews = new Vue({
-        el: '.pages-show-container',
-        data: {
-            pages_url: <?php echo json_encode(BASE_PATH . '/api/generic.php?__lms_action=pages'); ?>,
-            page_link_base: <?php echo json_encode(BASE_PATH. '/admin/?section=page_details'); ?>,
-            pages_data: '',
-            page_filter: '',
-            edit_mode: false,
-        },
-        mounted: function(){
-            this.getPageData();
-        },
-        methods: {
-            getPageData: function(){
-                var self = this;
-                var xhttp = new XMLHttpRequest();
-                xhttp.addEventListener("load", function(){
-                    self.pages_data = this.response;
-                    self.$nextTick(function(){
-                        this.initSortable();
-                    });
-                });
-                xhttp.open('GET', self.pages_url);
-                xhttp.responseType = 'json';
-                xhttp.send();
+    var base_path = <?php echo json_encode(BASE_PATH); ?>;
+    var pages_url =  <?php echo json_encode(BASE_PATH . '/api/generic.php?__lms_action=pages'); ?>;
+    var pages_edit_url = <?php echo json_encode(BASE_PATH . '/api/generic.php?__lms_action=pages-struct-edit'); ?>;
+    var page_link_base =  <?php echo json_encode(BASE_PATH. '/admin/?section=page_details'); ?>;
+    var pages_data = '';
+    var page_filter = '';
+    var edit_mode = false;
+    var nested_sortable_arr = [];
+    var page_drag_action = [];
 
-            },
-            initSortable: function(){
-                // Loop through each nested sortable element
-                var nestedSortables = $('.nested-items');
-                for (var i = 0; i < nestedSortables.length; i++) {
-                    new Sortable(nestedSortables[i], {
-                        group: 'nested',
-                        animation: 150,
-                        fallbackOnBody: true,
-                        swapThreshold: 0.65,
-                        emptyInsertThreshold: 10,
-                    });
-                }
+    function getPageData(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.addEventListener("load", function(){
+            pages_data = this.response;
+            $('.pages-show-container .nested-items').html($.templates('.list-group-template').render(pages_data));
+        });
+        xhttp.open('GET', self.pages_url);
+        xhttp.responseType = 'json';
+        xhttp.send();
+    }
 
-            },
-            toggleEditMode: function(){
+    function initSortable(){
+        // Loop through each nested sortable element
+        var nestedSortables = $('.nested-items');
+        for (var i = 0; i < nestedSortables.length; i++) {
+            self.nested_sortable_arr[i] =  new Sortable(nestedSortables[i], {
+                group: 'nested',
+                handle: '.handle',
+                animation: 150,
+                fallbackOnBody: true,
+                swapThreshold: 0.65,
+                emptyInsertThreshold: 10,
+                disabled: true,
+                onEnd: function (evt) {
+                    var end_dir = $(evt.item).parents('.nested-items').data('dir');
+                    var slug = $(evt.item).children('.page-drag-handle').data('slug');
+                    page_drag_action.push({
+                        parent_dir: end_dir,
+                        slug: slug,
+                    })
+                },
+            });
+        }
 
+    }
+
+    function enableSortable(){
+        edit_mode = !edit_mode;
+        for (var i = 0; i < nested_sortable_arr.length; i++) {
+            nested_sortable_arr[i].option('disabled', false);
+        }
+    }
+
+    function disableSortable(){
+        edit_mode = !edit_mode;
+        for (var i = 0; i < nested_sortable_arr.length; i++) {
+            nested_sortable_arr[i].option('disabled', true);
+        }
+    }
+
+    function saveNewStruct(){
+        var modalContent = $('#savingModal .modal-body')
+        modalContent.html($('#processNotice').html());
+        $('#savingModal').modal('toggle');
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() { // Call a function when the state changes.
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                modalContent.html($('#onSuccessNotice').html());
+                setTimeout(function(){
+                    $('#savingModal').modal('toggle');
+                }, 2000);
             }
         }
-    });
+        xhttp.open('POST', self.pages_edit_url, true);
+        xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8",);
+        xhttp.send(JSON.stringify(page_drag_action));
+    }
 
+    function toggleEditMode(){
+        if(edit_mode){
+            disableSortable();
+            $('#btn-edit-toggle').removeClass('d-none');
+            $('#btn-save-toggle').addClass('d-none');
+            saveNewStruct();
+            $('.handle.page-drag-handle').removeClass('bg-grey');
+        }
+        else{
+            if(!nested_sortable_arr.length) initSortable();
+            enableSortable();
+            $('#btn-edit-toggle').addClass('d-none');
+            $('#btn-save-toggle').removeClass('d-none');
+            $('.handle.page-drag-handle').addClass('bg-grey');
+        }
+    }
+
+    getPageData();
+
+    $(document).on('click', '.btn-operation-toggle', () => {
+        toggleEditMode();
+
+    });
 </script>

@@ -78,6 +78,13 @@ class Pages
         return $this->connection->select($this->page_table, '*', $where_arr);
     }
 
+    public function changePageParent($slug, $parent_slug){
+        $this->connection->update($this->page_table, [
+            'parent_slug' => $parent_slug,
+        ], [
+            'slug[=]' => $slug,
+        ]);
+    }
 
     public function getFSPages($language = null){
 

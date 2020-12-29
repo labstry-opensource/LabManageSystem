@@ -1,8 +1,17 @@
 .pages-show-container{
-  .list-group{
-
+  .handle.page-drag-handle{
+    position: absolute;
+    top: 0;
+    left:0;
+    bottom: 0;
+    width: 1rem;
   }
-  .list-group-item:empty{
-    border: none;
+  .list-group-item{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    &:empty{
+      border: none;
+    }
+
   }
 }
